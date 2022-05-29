@@ -1,0 +1,21 @@
+Build:
+
+python3 setup.py sdist bdist_wheel
+
+Install in dev app:
+
+pip install /home/developer/projects/django/django-brain-utils/dist/django_brain_utils*.tar.gz
+pip install /home/jimbuho/projects/django/django-brain/dist/django_brain_utils-0.1.9.tar.gz
+
+Install from test pip:
+
+pip install --index-url https://test.pypi.org/simple/ django-brain-utils
+
+UPLOAD in PIP Test:
+
+python3.8 -m twine upload --repository testpypi --skip-existing dist/*
+
+UPLOAD in PIP:
+
+python3.8 -m twine upload --repository dist/*
+
