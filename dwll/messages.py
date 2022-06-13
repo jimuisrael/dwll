@@ -61,7 +61,7 @@ class MessageManager:
             messages_dict = get_message.messages
         else:
             messages_dict = {}
-
+        
         if '%s.%s' % (language_name, name) in messages_dict:
             message = messages_dict['%s.%s' % (language_name, name)]
         else:
@@ -78,9 +78,9 @@ class MessageManager:
                     get_message.messages = messages_dict
                 else:
                     if self.create_default(name, self.language, default):
-                        message = default
+                        message = default if default else name
             except Exception as e:
-                print('[brainutils-messages] Error al obtener el mensaje: %s' % str(e))
+                print('[messages] Error al obtener el mensaje: %s' % str(e))
                 message = None
 
         if message == self.DEFAULT_MSG:
@@ -113,6 +113,7 @@ class MessageManager:
                     
                     models.MessageTraduction.objects.create(message=message, text=default if default else name,
                                                             language=languages.get_by_name(language))
+
             return True
         except Exception as e:
             import traceback

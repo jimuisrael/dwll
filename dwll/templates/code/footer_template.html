@@ -1,0 +1,42 @@
+{% load dwll %}
+
+<footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-6 col-md-6">
+            <div class="footer-info">
+              <h3>{% display_message 'footer.location' %}</h3>
+              <p>
+                {% display_message 'footer.address' %} <br>
+                {% display_message 'footer.city' %}<br><br>
+              </p>
+              <div class="social-links mt-3">
+                <!--<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>-->
+                <a href="https://www.facebook.com/" target="_blank" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="https://www.instagram.com/" target="_blank" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="https://www.linkedin.com/" target="_blank" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 col-md-6 footer-links">
+            <h4>{% display_message 'footer.anchors' %}</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">{% display_message 'footer.terms' %}</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">{% display_message 'footer.privacy' %}</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="copyright">
+        &copy; {% display_message 'footer.copyright' %}
+      </div>
+      <div class="credits">
+        Designed by <a href="#">DWLL</a>
+      </div>
+    </div>
+</footer><!-- End Footer -->

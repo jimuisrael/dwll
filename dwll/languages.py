@@ -25,16 +25,9 @@ class LanguageManager:
 
     def get_default(self):
         """
-
-        Get Default
-
-        Description
-            Permite consultar el lenguaje por defecto del sistema, si hay mas de uno
-            devuelve el primero en localizarse
-
+        Return the default language (spanish) 
         :return
             models.Language -- El lenguaje principal del sistema
-
         """
         main_languages = models.Language.objects.get_active(default=True)
 
@@ -54,15 +47,9 @@ class LanguageManager:
 
     def get_by_name(self, name):
         """
-
-        Get By Name
-
-        Description
-            Consulta un lenguaje por su nombre
-
+        Get the language by name
         :return
             models.Language -- El lenguaje
-
         """
         main_languages = models.Language.objects.get_active(name=name)
 
@@ -73,16 +60,9 @@ class LanguageManager:
 
     def get_language(self, request=None):
         """
-        Get Default
-
-        Description
-            Permite obtener el lenguaje actualmente elegido en el sistema, lo obtiene
-            de sesion. Si no esta en sesion aun, se toma el lenguaje por defecto y se lo
-            registra en la sesion para una futura ocacion.
-
+        Return the selected language or the default language
         :return
             models.Language -- El lenguaje principal del sistema
-
         """
         if request:
             return memory.manage(request).recover('dbu.languages.current', default_value=self.get_default())
@@ -92,13 +72,7 @@ class LanguageManager:
 
     def get_language_object(self, request):
         """
-        Get Default
-
-        Description
-            Permite obtener el modelo lenguaje actualmente elegido en el sistema, lo obtiene
-            de sesion. Si no esta en sesion aun, se toma el lenguaje por defecto y se lo
-            registra en la sesion para una futura ocacion.
-
+        Get the object of a language gived the request object, or create by default
         :return
             String -- Abreviacion i18n
 
@@ -113,14 +87,9 @@ class LanguageManager:
 
     def change_language(self, request, name):
         """
-        Change Language
-
-        Description
-            Permite realizar el cambio de lenguaje al indicado por el parametro 'name'
-
+        Let to change the language gived the 'name'
         :return
-            Boolean -- True si el cambio fue realizado, False en caso contrario
-
+            Boolean -- True if success
         """
         languages = models.Language.objects.get_active(name = name)
 
@@ -133,14 +102,8 @@ class LanguageManager:
 
     def create_language(self, name):
         """
-
-        Create Language
-
-        Description
-            Crea lenguaje por defecto
-
+        Register a new language or return it if exists
         :param name:
-
         """
         try:
             return models.Language.objects.create(name = name, title = name)
@@ -150,5 +113,13 @@ class LanguageManager:
                 return languages.first()
 
             return None
+
+    def get_languages_list(self, request):
+        """
+        List of active languages in list format, and with selected one checked
+        """
+        selected = self.get_language(request)
+        return [{'is_selected':selected == lang.name, 'name':lang.name, 'title':lang.title} \
+            for lang in models.Language.objects.get_active()]
 
 languages = LanguageManager()

@@ -5,7 +5,7 @@ Module {{app.name}} Admins Documentation
 """
 {% load bgen %}from django.contrib import admin
 from rangefilter.filter import DateRangeFilter
-from brainutils import mixadmin
+from dwll import mixadmin
 from . import models
 
 {% for model in models %}

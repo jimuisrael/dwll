@@ -202,7 +202,8 @@ def isTESTMode():
 
     :return: True si estamos en modo TEST
     """
-    return str(ConfigurationManager().get_value('common.workmode')) == \
+    return str(ConfigurationManager().get_value('common.workmode', 
+            default=ConfigurationManager.MAIN_CONFIG_WORMODE_DEFAULT)) == \
            str(ConfigurationManager.MAIN_CONFIG_WORMODE_DEFAULT)
 
 def isMaintenanceMode():

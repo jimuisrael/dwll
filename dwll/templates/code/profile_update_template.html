@@ -1,0 +1,46 @@
+<!-- IMPORTANT: Replace {} with {} in django templates code -->
+{% extends 'base.html' %}
+{% load i18n %}
+{% load dwll %}
+
+{% block title %}{% display_message 'profile.title' %}{% endblock %}
+
+{% block body %}
+<section>
+    <div class="container">
+        <div class="col-md-2">&nbsp;</div>
+        <div class="col-md-8">
+            <form id="this_form"  action="." method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.user}}
+                <div class="form-row">
+                    <div class="col-md-12 form-group">
+                        <label>{% display_message 'form.identification' %}:</label>&nbsp;{{form.identification}}
+                        <small>{{form.identification.errors}}</small>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12 form-group">
+                        <label>{% display_message 'form.picture' %}:</label>&nbsp;{{form.picture}}
+                        <small>{{form.picture.errors}}</small>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12 form-group">
+                        <label>{% display_message 'form.language' %}:</label>&nbsp;{{form.language}}
+                        <small>{{form.language.errors}}</small>
+                    </div>
+                </div>
+                <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a href="javascript:history.back{}" class="btn btn-secondary">
+                            {% display_message 'buttons.cancel' %}</a>
+                        <button type="submit" form="this_form">{% display_message 'buttons.save' %}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

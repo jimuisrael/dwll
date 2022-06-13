@@ -42,11 +42,11 @@ class CommonManager(models.Manager):
     def get_enabled(self, *args, **kwargs):
         """
 
-        Get Enabled
+        Get First Enabled
 
         """
         try:
-            elements = self.get_queryset().filter(*args, **kwargs).filter(status=AuditMixin.ACTIVE)
+            elements = self.get_active(*args, **kwargs)
             if elements.count() > 0:
                 return elements[0]
         except Exception as e:
@@ -249,7 +249,7 @@ class AuditMixinCode(AuditMixin):
             super(AuditMixinCode, self).save(*args, **kwargs)
 
     @staticmethod
-    def get_unique_code():
+    def get_unique_code(max=12):
         """
 
         Get Unique Code
@@ -260,7 +260,7 @@ class AuditMixinCode(AuditMixin):
         :return:
         """
         uid = uuid.uuid4().int & (1 << 64) - 1
-        return str(uid)[:12]
+        return str(uid)[:max]
 
     def generate_unique_id_12(self):
         """

@@ -1,39 +1,22 @@
 
 from django.http import HttpResponseRedirect
+
 from django.views.generic.base import View
 
-from brainutils import messages
-
+from . import messages
 from . import signals
+
 from .languages import languages
 
-class LanguageChangeView(View):
-    """
-
-    Language Change View
-    ===================
-
-    Description
-        Vista usada para cambiar el lenguaje del sistema
-
-    """
-
-    def get(self, request, *args, **kwargs):
-        """
-
-        Get
-
-        Description
-            Procesa el GET de esta vista
-
-        :param args:
-        :param kwargs:
-        :return:
-        """
-        if 'name' in request.GET:
-            resp, lang = languages.change_language(request, request.GET.get('name'))
+def change_language(request, name):
+    resp, lang = languages.change_language(request, name)
             
-            if resp:
-                signals.language_changed.send(sender=self.__class__, user=request.user, language=lang)
+    if resp:
+        signals.language_changed.send(sender='change_language', user=request.user, language=lang)
 
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+from allauth.account.views import LoginView
+
+class MyLoginView(LoginView):
+    template_name = 'dwll-account/login.html'

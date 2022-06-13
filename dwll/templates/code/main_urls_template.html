@@ -1,0 +1,10 @@
+"""
+
+MAIN Urls
+
+"""
+from django.urls import include, re_path
+urlpatterns = [
+    url(r'^accounts/', include('allauth.urls')),
+    url(r'^', include('{{app.name}}.urls'))
+]

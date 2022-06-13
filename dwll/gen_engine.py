@@ -58,34 +58,29 @@ class Template:
         if self.ext == 'py':
             to_path = os.path.join(self.app.path, '%s.py' % self.template_name)
             rendered = render_to_string('code/%s_template.html' % self.template_name,
-                                        {'models': gen_models.Models(self.app), 'app': self.app})
+                                        {'app': self.app})
 
             with open(to_path, 'w') as f:
                 f.write(rendered)
         else: # html
             models = gen_models.Models(self.app)
 
-            for model in models:
+           path = os.path.join(self.app.path, 'templates', self.app.name)
 
-                path = os.path.join(self.app.path, 'templates', self.app.name)
+            try:
+                os.mkdir(path)
+            except:
+                pass
 
-                try:
-                    os.mkdir(path)
-                except:
-                    pass
+            file_name = 'd_%s.html' % (self.template_name, str(model.name).lower())
 
-                if self.template_name == 'delete':
-                    file_name = '%s_delete_confirm.html' % str(model.name).lower()
-                else:
-                    file_name = '%s_%s.html' % (self.template_name, str(model.name).lower())
+            to_path = os.path.join(path, file_name)
 
-                to_path = os.path.join(path, file_name)
+            rendered = render_to_string('code/%s_html_template.html' % self.template_name,
+                                        {'model': model, 'app': self.app, 'mode': self.mode})
 
-                rendered = render_to_string('code/%s_html_template.html' % self.template_name,
-                                            {'model': model, 'app': self.app, 'mode': self.mode})
-
-                with open(to_path, 'w') as f:
-                    f.write(rendered)
+            with open(to_path, 'w') as f:
+                f.write(rendered)
 
 class AdminGenerator:
 
