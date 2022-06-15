@@ -5,32 +5,14 @@ import traceback
 import os
 import shutil
 
-from dwll import gen_engine
+from dwll import generator
 
 class ConsoleCommand:
-    """
-
-    Console Main Code Generator
-
-    """
-
-    def __init__(self):
-
-        self.generator = gen_engine.GeneratorEngine()
 
     def menu(self):
-        """
-
-        Menu
-
-        Description
-            Despliega el Menu
-
-        :return:
-        """
         print('DWLL GENERATOR')
         print('What we gonna do?:')
-        print('1. Generate Base')
+        print('1. Generate New App')
 
     def welcome(self):
         print('_________________________\n')
@@ -38,17 +20,7 @@ class ConsoleCommand:
         print('_________________________\n')
 
     def main(self):
-        """
-
-        MAIN
-
-        Description
-            Funcion principal de entrada
-
-        :return:
-        """
         self.welcome()
-
         self.menu()
 
         try:
@@ -68,15 +40,10 @@ class ConsoleCommand:
     def option_1(self):
         try:
             app_name = str(input('Input the app name:'))
-            if app_name:
-                path = '{}'.format(app_name)
-                # TODO: Copiar y generar archivos
-                os.mkdir(path)
-                shutil.copyfile(src, dst)
+            generator.run_generator_engine('app', app_name)
         except Exception as e:
             print('Error al procesar opcion 1:', str(e))
             traceback.print_exc()
-
 
 class Command(BaseCommand):
     """
@@ -97,5 +64,3 @@ class Command(BaseCommand):
         :return:
         """
         ConsoleCommand().main()
-
-
