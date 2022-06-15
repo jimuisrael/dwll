@@ -20,9 +20,9 @@ class Template:
 
         print('Generating file {} at path'.format(self.template_name, self.current_path))
 
-    def create_dir(self, dirname, secondary=''):
+    def create_dir(self, dirname, secondary='', third=''):
         try:
-            path = os.path.join(self.current_path, dirname, secondary)
+            path = os.path.join(self.current_path, dirname, secondary, third)
             if not os.path.isdir(path):
                 os.mkdir(path)
         except:
@@ -44,10 +44,16 @@ class Template:
                 with open(to_path, 'w') as f:
                     f.write(rendered)
             else:
-                self.create_dir(self.app_name, 'templates')
+                
                 from_path = os.path.join(BASE_DIR, 'templates', template_file)
-                to_path = os.path.join(self.current_path, self.app_name, 'templates', 
-                    '%s.html' % self.template_name)
+                if self.template_name in ['login','logout']:
+                    self.create_dir(self.app_name, 'templates', 'account')
+                    to_path = os.path.join(self.current_path, self.app_name, 'templates', 
+                        'account', '%s.html' % self.template_name)
+                else:
+                    self.create_dir(self.app_name, 'templates')
+                    to_path = os.path.join(self.current_path, self.app_name, 'templates', 
+                        '%s.html' % self.template_name)
                 print('Creando archivo HTML desde', from_path, 'hasta', to_path)
                 shutil.copyfile(from_path, to_path)
         except Exception as e:
@@ -74,6 +80,7 @@ class AppTemplatesGenerator(Generator):
 
     def generate(self):
         Template(self.app_name, 'base', 'html').render()
+        Template(self.app_name, 'header', 'html').render()
         Template(self.app_name, 'footer', 'html').render()
         Template(self.app_name, 'home', 'html').render()
         Template(self.app_name, 'login', 'html').render()
