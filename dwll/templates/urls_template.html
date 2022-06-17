@@ -7,5 +7,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.home, name='index')
+    path('', views.home, name='index'),
+    {% if model_name %}path('{{model_name|lower}}s/', views.{{model_name|title}}List.as_view(), name='{{model_name|lower}}s'){% endif %}
 ]

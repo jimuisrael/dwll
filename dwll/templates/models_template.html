@@ -6,5 +6,8 @@ Module {{app_name}} Models
 from django.db import models
 from dwll import mixins
 
-# Your models here
-# class YourModel(mixins.AuditMixin):
+{% if model_name %}
+class {{model_name|title}}(mixins.AuditMixin):
+    name = models.CharField(max_length=20)
+    slug = models.CharField(max_length=2)
+{% endif %}

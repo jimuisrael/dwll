@@ -4,6 +4,26 @@ Module {{app_name}} Views
 
 """
 from django.shortcuts import render
+{% if model_name %}
+from dwll.virtual_views import (
+    LoginRequiredSecurityMixin,
+    VirtualListView
+)
+from .models import {{model_name|title}}
+{% endif %}
 
 def home(request):
     return render(request, 'home.html')
+
+{% if model_name %}
+class {{model_name|title}}List(LoginRequiredSecurityMixin, VirtualListView):
+    model = {{model_name|title}}
+    
+    @property
+    def view_filters(self):
+        return ["slug"]
+    
+    @property
+    def view_orderedby(self):
+        return "-creation_date"
+{% endif %}

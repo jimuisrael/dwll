@@ -39,8 +39,14 @@ class ConsoleCommand:
 
     def option_1(self):
         try:
-            app_name = str(input('Input the app name:'))
-            generator.run_generator_engine('app', app_name)
+            app_name = str(input('Set the app name:'))
+            
+            option = str(input("Do you need to generate example model? (y/N) "))
+            model_name = None
+            if option == 'y':
+                model_name = str(input('Set the model name:'))
+            
+            generator.run_generator_engine('app', app_name, model_name)
         except Exception as e:
             print('Error al procesar opcion 1:', str(e))
             traceback.print_exc()
