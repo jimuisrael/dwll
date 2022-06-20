@@ -120,3 +120,16 @@ Y finalmente ejecutaremos el proyecto
 ```
 ./manage.py runserver
 ```
+
+
+## Licencia
+
+MIT
+
+**Free Software, Hell Yeah!**
+
+[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
+
+   [dwll]: <https://github.com/jimuisrael/dwll>
+   [df1]: <http://joaquin.medina.name/web2008/documentos/informatica/documentacion/logica/OOP/Principios/2012_07_30_OopNoTeRepitas.html>
+   
