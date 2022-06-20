@@ -1,6 +1,9 @@
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from django.contrib import messages
+from django.contrib import messages as django_messages
+from django.http import HttpResponseRedirect
+
+from dwll import messages
 
 from django.views.generic import (
     UpdateView, 
@@ -50,7 +53,7 @@ class VirtualListView(ABC, ListView):
   
             queryset = queryset.filter(query)  
         except Exception as e:
-            messages.error(self.request, str(e))
+            django_messages.error(self.request, str(e))
 
         if self.view_orderedby:
             return queryset.order_by(self.view_orderedby)
@@ -66,3 +69,57 @@ class VirtualListView(ABC, ListView):
             ctx[filter] = self.request.GET[filter] if filter in self.request.GET else None
         
         return ctx
+
+class CRUDSaveView(ABC):
+    """ Clase abstracta para vistas de tipo Create y Update """
+    
+    @abstractmethod
+    def do_after_save(self, obj):
+        pass
+    
+    @abstractmethod
+    def get_success_url(self):
+        pass
+
+    @abstractmethod
+    def get_fail_url(self):
+        pass
+    
+    def get_form_kwargs(self):
+        kwargs = super(CRUDSaveView, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+    
+    def form_valid(self, form, **kwargs):
+        obj = form.save()
+        if obj and obj.id:
+            self.do_after_save(obj)
+            
+            obj_name = obj.__class__.__name__.lower()
+            django_messages.success(self.request, 
+                    messages.get_full_message(self.request, 
+                    '{}.create.success'.format(obj_name)))
+
+        return HttpResponseRedirect(self.get_success_url())
+
+class VirtualCreateView(CRUDSaveView, CreateView):
+    
+    def get_success_url(self):
+        return self.request.path_info
+    
+    def get_fail_url(self):
+        return self.request.path_info
+    
+    def do_after_save(self, obj):
+        pass
+
+class VirtualUpdateView(CRUDSaveView, UpdateView):
+    
+    def get_success_url(self):
+        return self.request.path_info
+    
+    def get_fail_url(self):
+        return self.request.path_info
+    
+    def do_after_save(self, obj):
+        pass

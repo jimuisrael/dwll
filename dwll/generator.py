@@ -5,6 +5,8 @@ import shutil
 import os
 import traceback
 
+from .memory import dinamic
+
 BASE_DIR = Path(__file__).resolve().parent
 
 class Template:
@@ -12,12 +14,13 @@ class Template:
     PYTHON_FILE = 'py'
     HTML_FILE = 'html'
 
-    def __init__(self, app_name, model_name, template_name, ext='py'):
+    def __init__(self, app_name, model_name, template_name, ext='py', do_replace=False):
         self.app_name = app_name
         self.model_name = model_name
         self.template_name = template_name
         self.ext = ext
         self.current_path = os.path.abspath(os.getcwd())
+        self.do_replace = do_replace
 
         print('Generating file {} at path'.format(self.template_name, self.current_path))
 
@@ -42,7 +45,9 @@ class Template:
                                                             'model_name': self.model_name})
                 to_path = os.path.join(self.current_path, self.app_name,
                     '%s.py' % ("__init__" if  self.template_name == 'init' else self.template_name))
-                print('Creando archivo Python en', to_path)
+                
+                print('- Creando archivo Python:', self.template_name)
+                
                 with open(to_path, 'w') as f:
                     f.write(rendered)
             else:
@@ -52,19 +57,27 @@ class Template:
                     self.create_dir(self.app_name, 'templates', 'account')
                     to_path = os.path.join(self.current_path, self.app_name, 'templates', 
                         'account', '%s.html' % self.template_name)
-                elif self.template_name  == 'list':
+                elif self.template_name in ['list','form']:
                     self.create_dir(self.app_name, 'templates', self.app_name)
                     to_path = os.path.join(self.current_path, self.app_name, 'templates', 
-                        self.app_name, '%s_list.html' % self.model_name)
+                        self.app_name, '%s_%s.html' % (self.model_name, self.template_name))
                 else:
                     self.create_dir(self.app_name, 'templates')
                     to_path = os.path.join(self.current_path, self.app_name, 'templates', 
                         '%s.html' % self.template_name)
-                print('Creando archivo HTML desde', from_path, 'hasta', to_path)
+                    
+                print('- Creando archivo HTML:', self.template_name)
+                
                 shutil.copyfile(from_path, to_path)
+                
+                if self.do_replace:
+                    self.replace_html_var(to_path)
         except Exception as e:
             print('Generation Error:',e)
             traceback.print_exc()
+            
+    def replace_html_var(self, final_path):
+        dinamic.replace_html(final_path, '[ITEM]', self.model_name)
 
 class Generator:
 
@@ -83,6 +96,7 @@ class AppGenerator(Generator):
         Template(self.app_name, self.model_name, 'tests').render()
         Template(self.app_name, self.model_name, 'urls').render()
         Template(self.app_name, self.model_name, 'views').render()
+        Template(self.app_name, self.model_name, 'forms').render()
 
 class AppTemplatesGenerator(Generator):
 
@@ -94,9 +108,11 @@ class AppTemplatesGenerator(Generator):
         Template(self.app_name, None, 'login', 'html').render()
         Template(self.app_name, None, 'logout', 'html').render()
         Template(self.app_name, None, 'menu', 'html').render()
+        Template(self.app_name, None, 'messages', 'html').render()
         
         if self.model_name:
-            Template(self.app_name, self.model_name, 'list', 'html').render()
+            Template(self.app_name, self.model_name, 'list', 'html', do_replace=True).render()
+            Template(self.app_name, self.model_name, 'form', 'html').render()
 
 def run_generator_engine(option, app_name=None, model_name=None):
 

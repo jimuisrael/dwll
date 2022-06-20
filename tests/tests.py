@@ -6,11 +6,14 @@ from dwll import configuration
 from dwll import models
 from dwll import mixins
 from dwll.admins import modeladmin
+from dwll.memory import dinamic
 
 from .fake_request import request
 
+from pathlib import Path
+import shutil
+import os
 import datetime
-
 
 class LanguageTestCase(TestCase):
     
@@ -95,3 +98,21 @@ class ModelMixins(TestCase):
         language = languages.get_language(request)
         msg = messages.get_message('message.title', language)
         self.assertEqual(msg, 'message.title')
+        
+
+BASE_DIR = Path(__file__).resolve().parent
+EXPECTED_FILE = """<section class="py-5">
+<h1>{{mymodel}} List</h1>
+</section>"""
+
+class HTMLGenTest(TestCase):
+
+    def test_copy_replace(self):
+        template_file = 'htmlrep_test.html'
+        from_path = os.path.join(BASE_DIR, template_file)
+        to_path = '/tmp/{}'.format(template_file)
+        shutil.copyfile(from_path, to_path)        
+        success, result = dinamic.replace_html(to_path, '[ITEM]', 'mymodel')
+
+        self.assertTrue(success)
+        self.assertEqual(result, EXPECTED_FILE)
