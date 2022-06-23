@@ -19,9 +19,9 @@ Django Web Launch Library es una librería de elementos utilitarios que le permi
 - Vistas virtuales que permiten crear vistas de formato CRUD con muy pocas lineas de codigo
 - Sistema de mensajes de texto a ser usados en todo el sitio Web y en el backend, con su respectiva administración de textos por lenguaje para la gestión de su traducción.
 - Sistema de configuraciones para agregar banderas y propiedades administrables a su aplicación Web.
-- Autogenerador de una plantilla de aplicación Web principal para arrancar el desarrollo de forma acelerada.
+- Autogenerador de una apĺicación (plantilla) principal que le permitirán arrancar el desarrollo rápidamente.
 
-DWLL permite que los desarrolladores tomen un camino claro y directo en el desarrollo de sus aplicaciones, siguiendo el principio DRY, Don't Repeat Yourself:
+DWLL permite que los desarrolladores tomen un camino claro y directo en la construcción de sus aplicaciones, siguiendo el principio DRY, Don't Repeat Yourself:
 Como [Joaquin Medina] escribe en [su Blog][df1]
 
 > DRY, es una filosofía de definición de procesos que 
@@ -32,14 +32,14 @@ Como [Joaquin Medina] escribe en [su Blog][df1]
 > y evolución posterior, puede perjudicar la claridad 
 > y crear un espacio para posibles inconsistencias
 
-Esta librería le permitirá evitar reescribir los elementos comunes en el desarrollo de sus aplicaciones Web con Django, proporcionando un camino definido a seguir y con la menor cantidad de código posible.
+Esta librería permitirá evitar que rescriba los elementos más comunes en el desarrollo de aplicaciones Web. Proporciona un camino definido a seguir, y con la menor cantidad de código posible.
 
 ## Tecnología
 
 DWLL esta dirigido al desarrollo de aplicaciones Web con Django 4.0 y hace uso de las siguientes librerías:
 
-- [Allauth] - Librería Django que permite el manejo de todo lo relacionado con la autenticación de usuarios.
-
+- [Allauth] - Librería para Django que permite el manejo de todo lo relacionado con la autenticación y registro de usuarios.
+- [Beautifulsoup4] - Librería que permite el manejo de archivos html usados por el autogenerador de DWLL
 
 ## Instalación
 
@@ -144,6 +144,8 @@ MIT
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
+   [Allauth]: <https://django-allauth.readthedocs.io/en/latest/overview.html>
+   [Beautifulsoup4]: <https://pypi.org/project/beautifulsoup4/>
    [dwll]: <https://github.com/jimuisrael/dwll>
    [df1]: <http://joaquin.medina.name/web2008/documentos/informatica/documentacion/logica/OOP/Principios/2012_07_30_OopNoTeRepitas.html>
    
