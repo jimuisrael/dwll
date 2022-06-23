@@ -22,8 +22,6 @@ class Template:
         self.current_path = os.path.abspath(os.getcwd())
         self.do_replace = do_replace
 
-        print('Generating file {} at path'.format(self.template_name, self.current_path))
-
     def create_dir(self, dirname, secondary='', third=''):
         try:
             path = os.path.join(self.current_path, dirname, secondary, third)
@@ -112,7 +110,7 @@ class AppTemplatesGenerator(Generator):
         
         if self.model_name:
             Template(self.app_name, self.model_name, 'list', 'html', do_replace=True).render()
-            Template(self.app_name, self.model_name, 'form', 'html').render()
+            Template(self.app_name, self.model_name, 'form', 'html', do_replace=True).render()
 
 def run_generator_engine(option, app_name=None, model_name=None):
 

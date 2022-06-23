@@ -13,6 +13,7 @@ class ConsoleCommand:
         print('DWLL GENERATOR')
         print('What we gonna do?:')
         print('1. Generate New App')
+        print('0. Salir')
 
     def welcome(self):
         print('_________________________\n')

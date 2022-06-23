@@ -32,7 +32,7 @@ Como [Joaquin Medina] escribe en [su Blog][df1]
 > y evolución posterior, puede perjudicar la claridad 
 > y crear un espacio para posibles inconsistencias
 
-Esta librería le permitirá evitar reescribir los elementos comunes en el desarrollo de sus aplicaciones, proporcionando un camino definido a seguir y con menor cantidad de código.
+Esta librería le permitirá evitar reescribir los elementos comunes en el desarrollo de sus aplicaciones Web con Django, proporcionando un camino definido a seguir y con la menor cantidad de código posible.
 
 ## Tecnología
 
@@ -45,7 +45,7 @@ DWLL esta dirigido al desarrollo de aplicaciones Web con Django 4.0 y hace uso d
 
 DWLL requiere [Django](https://docs.djangoproject.com/en/4.0/releases/4.0/) v4.0+ para funcionar.
 
-Instale un entorno virtual para instalar Django y DWLL.
+1. Instale un entorno virtual para instalar Django y DWLL.
 
 ```sh
 sudo apt-get install python3-pip
@@ -54,73 +54,87 @@ virtualenv -p python3 venv
 source venv/bin/activate
 ```
 
-Instale Django
+2. Instale Django y DWLL
 
 ```sh
 pip install django
-```
-Instale DWLL
-
-```sh
 pip install dwll
 ```
 
-Cree un proyecto Django, en este caso de ejemplo llamaremos a este proyecto como "myproject"
+3. Cree un proyecto Django, en este ejemplo llamaremos a este proyecto: "myproject"
 
 ```
 django-admin startproject myproject
 cd myproject
 ```
 
-Ejecute el generador de su primera aplicación
+4. Incluir las siguientes aplicaciones en INSTALLED_APPS de su archivo myproject/myproject/settings.py:
+
+```
+'allauth',
+'allauth.account',
+'allauth.socialaccount',
+'dwll',
+```
+
+5. Ejecute el generador de su primera aplicación...
+
 ```
 ./manage.py dwll-gen
 ```
 
-Siga los pasos, puede elegir generar una aplicación con un modelo ejemplo o solamente la estructura base de una aplicación de inicio.
+...y siga las instrucciones indicadas en la consola. Puede elegir generar la plantilla de una aplicación con un modelo de ejemplo, o solamente la estructura base de una aplicación para iniciar. En este ejemplo llamaremos a la aplicacion "myapp" y al modelo "mymodel".
 
-Ahora registre la nueva aplicación agregando el siguiente código al final del archivo settings (myproject/settings.py):
+6. Una vez terminada la generación de la nueva app, copie el siguiente segmento de código al final de su archivo general de URLs: myproject/myproject/urls.py. 
+
 ```
-LOGIN_REDIRECT_URL = '/'
-
-INSTALLED_APPS.extend([
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'dwll',
-    'myproject'
-])
-
-import os
-TEMPLATES[0]['DIRS'].append(os.path.join(BASE_DIR, 'myproject', 'templates'))
-```
-
-Ahora agreguemos las siguientes lineas al archivo myproject/urls.py:
-```
-from django.urls import path, include
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('koko.urls')),
+from django.urls import include
+urlpatterns.extend([
+    path('', include('myapp.urls')),
     path('accounts/', include('allauth.urls')),
     path('dwll/', include('dwll.urls'))
-]
+])
 ```
-Una vez realizados estas configuraciones del proyecto, realizaremos la migracion a la base de datos:
+
+Y lo siguiente en su archivo de settings:
+
 ```
-./manage.py makemigrations myproject
+import os
+INSTALLED_APPS.append('myapp')
+TEMPLATES[0]['DIRS'].append(os.path.join(BASE_DIR, 'myapp', 'templates'))
+LOGIN_REDIRECT_URL = '/'
+```
+
+**Nota:** Luego puede unificar el código copiado a discresión, el formato descrito acá es solo para efectos del ejemplo.
+
+7. Una vez realizados las configuraciones del proyecto, realizaremos la migracion a la base de datos:
+
+```
+./manage.py makemigrations myapp
 ./manage.py migrate
 ```
 
-Crearemos un super usuario de administracion para probar con el siguiente correo:
+Al hacerlo, deberia conseguir una salida similar a la siguiente (y adicionalmente un listado de todos los modelos migrados a su base de datos temporal):
+
+```
+Migrations for 'myapp':
+  myapp/migrations/0001_initial.py
+    - Create model MyModel
+```
+
+8. Ahora es necesario crear un super usuario para probar la aplicación y la administración del sistema.
 ```
 ./manage.py createsuperuser
 ```
 
-Y finalmente ejecutaremos el proyecto
+Deberá seguir las instrucciones en consola. Puede ingresar el nombre, email y clave que prefiera, pero deberá recordarlos para poder usar esos datos luego.
+
+9. Finalmente, ejecutaremos el proyecto con el siguiente comando:
 ```
 ./manage.py runserver
 ```
 
+10. Podremos ingresar a la siguiente URL para ver nuestro nuevo home-page http://localhost:8000. Además en la siguiente dirección podrá revisar un ejemplo del CRUD autogenerado incluido http://localhost:8000/mymodels/ (para acceder deberá autentticarse con su usuario generado, o con cualquier usuario registrado en la consola administrativa de Django: http://localhost:8000/admin)
 
 ## Licencia
 

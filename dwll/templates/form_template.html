@@ -26,7 +26,7 @@
                             <button type="submit" form="this_form" class="btn btn-primary">
                                 {% display_message 'form.save' 'Guardar' %}
                             </button>
-                            <a onclick="history.back()" class="btn btn-secondary">
+                            <a href="{% url '[ITEM]s' %}" class="btn btn-secondary">
                                 {% display_message 'form.cancel' 'Cancelar' %}
                             </a>
                         </div>
