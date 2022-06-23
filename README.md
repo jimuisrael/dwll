@@ -3,7 +3,7 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-Django Web Launch Library es una librería de elementos utilitarios que le permitirán generar aplicaciones Web (Backend-Frontend) con Django de forma rápida y sencilla, evitando la construcción de elementos habituales en sistemas Web y de esta forma evitar repetirlos para acelerar el desarrollo de su aplicación. DWLL contiene elementos que cubre los siguientes módulos
+Django Web Launch Library es una librería de elementos utilitarios que le permitirán generar aplicaciones Web (Backend-Frontend) bajo framework Django, de forma rápida y sencilla, asi evitaremos la construcción de elementos habituales en la mayoria de sistemas Web, y aceleraremos el desarrollo de su aplicación. DWLL contiene elementos que cubre los siguientes módulos:
 
 - Vistas
 - Formularios
@@ -134,7 +134,7 @@ Deberá seguir las instrucciones en consola. Puede ingresar el nombre, email y c
 ./manage.py runserver
 ```
 
-10. Podremos ingresar a la siguiente URL para ver nuestro nuevo home-page http://localhost:8000. Además, si ha seleccionado generar un modelo de ejemplo, en la siguiente dirección podrá revisar un ejemplo del CRUD autogenerado para dicho modelo: http://localhost:8000/mymodels/ (para acceder deberá autentticarse con su usuario generado, o con cualquier usuario registrado en la consola administrativa de Django: http://localhost:8000/admin)
+10. Podremos ingresar a la siguiente URL para ver nuestro nuevo home-page http://localhost:8000. Además, si ha seleccionado generar un modelo de ejemplo, en la siguiente dirección podrá revisar un ejemplo del CRUD autogenerado para dicho modelo: http://localhost:8000/mymodels/ (para acceder deberá autenticarse con su usuario generado, o con cualquier usuario registrado en la consola administrativa de Django: http://localhost:8000/admin)
 
 ## Licencia
 
