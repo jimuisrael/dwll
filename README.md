@@ -105,16 +105,16 @@ TEMPLATES[0]['DIRS'].append(os.path.join(BASE_DIR, 'myapp', 'templates'))
 LOGIN_REDIRECT_URL = '/'
 ```
 
-**Nota:** Luego puede unificar el código copiado a discresión, el formato descrito acá es solo para efectos del ejemplo.
+**Nota:** Luego puede unificar el código copiado a discreción, el formato descrito acá es solo para efectos del ejemplo.
 
-7. Una vez realizados las configuraciones del proyecto, realizaremos la migracion a la base de datos:
+7. Una vez realizados las configuraciones del proyecto, realizaremos la migracion a la base de datos, esto solo deberá realizarlo si ha seleccionado generar el modelo de ejemplo, caso contrario omita la primera linea del siguiente comando:
 
 ```
 ./manage.py makemigrations myapp
 ./manage.py migrate
 ```
 
-Al hacerlo, deberia conseguir una salida similar a la siguiente (y adicionalmente un listado de todos los modelos migrados a su base de datos temporal):
+Al ejecutar lo anterior, deberia conseguir una salida similar a la siguiente (y adicionalmente un listado de todos los modelos migrados a su base de datos temporal):
 
 ```
 Migrations for 'myapp':
@@ -134,7 +134,7 @@ Deberá seguir las instrucciones en consola. Puede ingresar el nombre, email y c
 ./manage.py runserver
 ```
 
-10. Podremos ingresar a la siguiente URL para ver nuestro nuevo home-page http://localhost:8000. Además en la siguiente dirección podrá revisar un ejemplo del CRUD autogenerado incluido http://localhost:8000/mymodels/ (para acceder deberá autentticarse con su usuario generado, o con cualquier usuario registrado en la consola administrativa de Django: http://localhost:8000/admin)
+10. Podremos ingresar a la siguiente URL para ver nuestro nuevo home-page http://localhost:8000. Además, si ha seleccionado generar un modelo de ejemplo, en la siguiente dirección podrá revisar un ejemplo del CRUD autogenerado para dicho modelo: http://localhost:8000/mymodels/ (para acceder deberá autentticarse con su usuario generado, o con cualquier usuario registrado en la consola administrativa de Django: http://localhost:8000/admin)
 
 ## Licencia
 
