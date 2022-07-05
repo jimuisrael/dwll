@@ -141,17 +141,18 @@ Deberá seguir las instrucciones en consola. Puede ingresar el nombre, email y c
 DWLL autogenera dos archivos que permiten al desarrollador probar la funcionalidad y eficiencia de su nueva aplicación.
 
 ### Funcionalidad
-Para probar la funcionalidad de una algoritmo o un segmento de su codigo ejecute el siguiente comando
+Para probar la funcionalidad de una algoritmo o un segmento de su codigo ejecute el siguiente comando>
+```
 ./manage.py test myapp
+```
 
 ### Estress y Carga
-Para realizar pruebas de carga y estress a sus pantallas ejecute los siguientes comandos:
+Para realizar pruebas de carga y estress a sus pantallas, ejecute los siguientes comandos:
 ```
 cd myapp
 locust
 ```
-Esto inicia el servidor de Locust para pruebas de carga y estress, para ejecutarlo simplemente ingrese a
-http://localhost:8089/ y podrá ejecutar cualquier clase de prueba con varios usuarios recurrentes a la vez.
+Esto inicia el servidor de Locust para pruebas de carga y estress. Para iniciar la preparación y ejecución de las pruebas simplemente ingrese a la siguiente dirección: http://localhost:8089/, alli podrá ejecutar cualquier clase de prueba con varios usuarios recurrentes a la vez y medir el rendimiento de su aplicación Web, aún luego de incluir mayor funcionalidad que la autogenerada.
 
 ## Licencia
 
