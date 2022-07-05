@@ -95,6 +95,7 @@ class AppGenerator(Generator):
         Template(self.app_name, self.model_name, 'urls').render()
         Template(self.app_name, self.model_name, 'views').render()
         Template(self.app_name, self.model_name, 'forms').render()
+        Template(self.app_name, self.model_name, 'locustfile').render()
 
 class AppTemplatesGenerator(Generator):
 
@@ -110,7 +111,7 @@ class AppTemplatesGenerator(Generator):
         
         if self.model_name:
             Template(self.app_name, self.model_name, 'list', 'html', do_replace=True).render()
-            Template(self.app_name, self.model_name, 'form', 'html', do_replace=True).render()
+            Template(self.app_name, self.model_name, 'form', 'html', do_replace=True).render()        
 
 def run_generator_engine(option, app_name=None, model_name=None):
 

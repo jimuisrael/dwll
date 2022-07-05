@@ -40,6 +40,7 @@ DWLL esta dirigido al desarrollo de aplicaciones Web con Django 4.0 y hace uso d
 
 - [Allauth] - Librería para Django que permite el manejo de todo lo relacionado con la autenticación y registro de usuarios.
 - [Beautifulsoup4] - Librería que permite el manejo de archivos html usados por el autogenerador de DWLL
+- [Locust] - Librería que permite realizar pruebas de estress y carga a las pantallas de las aplicaciones autogeneradas con DWLL
 
 ## Instalación
 
@@ -135,6 +136,22 @@ Deberá seguir las instrucciones en consola. Puede ingresar el nombre, email y c
 ```
 
 10. Podremos ingresar a la siguiente URL para ver nuestro nuevo home-page http://localhost:8000. Además, si ha seleccionado generar un modelo de ejemplo, en la siguiente dirección podrá revisar un ejemplo del CRUD autogenerado para dicho modelo: http://localhost:8000/mymodels/ (para acceder deberá autenticarse con su usuario generado, o con cualquier usuario registrado en la consola administrativa de Django: http://localhost:8000/admin)
+
+## Pruebas
+DWLL autogenera dos archivos que permiten al desarrollador probar la funcionalidad y eficiencia de su nueva aplicación.
+
+### Funcionalidad
+Para probar la funcionalidad de una algoritmo o un segmento de su codigo ejecute el siguiente comando
+./manage.py test myapp
+
+### Estress y Carga
+Para realizar pruebas de carga y estress a sus pantallas ejecute los siguientes comandos:
+```
+cd myapp
+locust
+```
+Esto inicia el servidor de Locust para pruebas de carga y estress, para ejecutarlo simplemente ingrese a
+http://localhost:8089/ y podrá ejecutar cualquier clase de prueba con varios usuarios recurrentes a la vez.
 
 ## Licencia
 
