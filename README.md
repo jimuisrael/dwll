@@ -165,4 +165,5 @@ MIT
    [Beautifulsoup4]: <https://pypi.org/project/beautifulsoup4/>
    [dwll]: <https://github.com/jimuisrael/dwll>
    [df1]: <http://joaquin.medina.name/web2008/documentos/informatica/documentacion/logica/OOP/Principios/2012_07_30_OopNoTeRepitas.html>
+   [Locust]: <https://locust.io/>
    
