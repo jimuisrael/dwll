@@ -6,13 +6,13 @@ Install in sample app:
 
 pip install PATHTOPROJECT/dist/dwll-*.tar.gz
 
-Install from test pip:
-
-pip install --index-url https://test.pypi.org/simple/ dwll
-
 UPLOAD in PIP Test:
 
 python3.8 -m twine upload --repository testpypi --skip-existing dist/*
+
+Install from test pip:
+
+pip install --index-url https://test.pypi.org/simple/ dwll
 
 UPLOAD in PIP:
 

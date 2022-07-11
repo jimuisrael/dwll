@@ -1,8 +1,6 @@
 # DWLL
 ## _Django Web Launch Library_
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
 Django Web Launch Library es una librería de elementos utilitarios que le permitirán generar aplicaciones Web (Backend-Frontend) bajo framework Django, de forma rápida y sencilla, asi evitaremos la construcción de elementos habituales en la mayoria de sistemas Web, y aceleraremos el desarrollo de su aplicación. DWLL contiene elementos que cubre los siguientes módulos:
 
 - Vistas
