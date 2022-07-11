@@ -16,4 +16,4 @@ pip install --index-url https://test.pypi.org/simple/ dwll
 
 UPLOAD in PIP:
 
-python3.8 -m twine upload --repository dist/*
+python3.8 -m twine upload dist/*

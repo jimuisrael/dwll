@@ -2,8 +2,6 @@
 from django.core.management.base import BaseCommand
 
 import traceback
-import os
-import shutil
 
 from dwll import generator
 

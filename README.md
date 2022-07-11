@@ -53,10 +53,10 @@ virtualenv -p python3 venv
 source venv/bin/activate
 ```
 
-2. Instale Django y DWLL
+2. Instale Django, dependencias, y DWLL
 
 ```sh
-pip install django
+pip install django django-allauth locust beautifulsoup4
 pip install dwll
 ```
 
