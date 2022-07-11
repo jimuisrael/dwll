@@ -10,15 +10,15 @@ from dwll import generator
 class ConsoleCommand:
 
     def menu(self):
-        print('DWLL GENERATOR')
-        print('What we gonna do?:')
-        print('1. Generate New App')
+        print('GENERADOR DWLL')
+        print('Elija una actividad a realizar:')
+        print('1. Generar nueva APP')
         print('0. Salir')
 
     def welcome(self):
-        print('_________________________\n')
-        print('Welcome to Django Web Launch Library')
-        print('_________________________\n')
+        print('_____________________________________\n')
+        print('Bienvenido a Django Web Lauch Library')
+        print('_____________________________________\n')
 
     def main(self):
         self.welcome()
@@ -26,26 +26,26 @@ class ConsoleCommand:
 
         try:
             while (True):
-                option = str(input("Select and option[and press ENTER]: "))
+                option = str(input('Ingrese actividad [y pulse ENTER]: '))
                 if option == '0':
                     break
                 elif option == '1':
                     self.option_1()
                     self.menu()
                 else:
-                    print('Invalid Option:', option)
+                    print('Actividad Incorrecta:', option)
         except Exception as e:
-            print('Error to process: %s' % str(e))
+            print('Error al procesar: %s' % str(e))
             traceback.print_exc()
 
     def option_1(self):
         try:
-            app_name = str(input('Set the app name:'))
+            app_name = str(input('Ingrese un nombre de APP:'))
             
-            option = str(input("Do you need to generate example model? (y/N) "))
+            option = str(input("Quiere autogenerar un modelo de ejemplo? (s/N) "))
             model_name = None
-            if option == 'y':
-                model_name = str(input('Set the model name:'))
+            if option == 's':
+                model_name = str(input('Ingrese el nombre del modelo (tabla):'))
             
             generator.run_generator_engine('app', app_name, model_name)
         except Exception as e:
@@ -59,7 +59,7 @@ class Command(BaseCommand):
 
     """
     args = '<app app ...>'
-    help = 'Console Code  Generator'
+    help = 'Console Code Generator'
 
     def handle(self, *args, **kwargs):
         """

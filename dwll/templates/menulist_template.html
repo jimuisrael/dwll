@@ -35,6 +35,12 @@
             <ul class="dropdown-menu" aria-labelledby="navbarAccount">
               <li class="nav-item">
                 <a class="dropdown-item" 
+                    href="{% url '[ITEM]s' %}">
+                    {% display_message 'menu.list' 'Listado' %}
+                </a> 
+              </li> 
+              <li class="nav-item">
+                <a class="dropdown-item" 
                     href="{% url 'account_logout' %}">
                     {% display_message 'menu.logout' 'Salir' %}
                 </a> 
