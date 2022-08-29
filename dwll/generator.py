@@ -16,8 +16,8 @@ class Template:
 
     def __init__(self, app_name, model_name, template_name, ext='py', do_replace=False, 
                  final_template_name=None):
-        self.app_name = app_name
-        self.model_name = model_name
+        self.app_name = app_name.strip() if app_name else app_name
+        self.model_name = model_name.strip() if model_name else model_name
         self.template_name = template_name
         self.ext = ext
         self.current_path = os.path.abspath(os.getcwd())
@@ -119,10 +119,62 @@ class AppTemplatesGenerator(Generator):
                      do_replace=True, final_template_name='menu').render()
         else:
             Template(self.app_name, None, 'menu', 'html').render()    
+            
+class AppSettingsModifier:
+    
+    def get_settings_lines(self, app_name):
+        return [
+            "\n\nimport os\n",
+            "INSTALLED_APPS.append('{}')\n".format(app_name),
+            "TEMPLATES[0]['DIRS'].append(os.path.join(BASE_DIR, '{}', 'templates'))\n".format(app_name),
+            "LOGIN_REDIRECT_URL = '/'"
+        ]
+    
+    def get_urls_lines(self, app_name):
+        return [
+            "\n\nfrom django.urls import include\n",
+            "urlpatterns.extend([\n",
+            "    path('', include('{}.urls')),\n".format(app_name),
+            "    path('accounts/', include('allauth.urls')),\n",
+            "    path('dwll/', include('dwll.urls'))\n",
+            "])"
+        ]
+    
+    def modify(self, app_name_str):
+        if not app_name_str:
+            print('Imposible generar codigo en sus archivos sin el nombre de la aplicacion')
+            return
+        
+        from django.conf import settings
+        
+        target_dir = settings.BASE_DIR
+        app_name = app_name_str.strip().lower()
+        proj_name = os.path.basename(target_dir)
+        
+        print('Actualizando archivo settings.py para el proyecto', proj_name)
+        if os.path.exists(os.path.join(proj_name, 'settings.py')):
+            settings_path = os.path.join(target_dir, proj_name, 'settings.py')
+            with open(settings_path, 'a') as f:
+                f.writelines(self.get_settings_lines(app_name))
+        else:
+            print('Archivo no existe en la ubicacion', os.path.join(proj_name, 'settings.py'))
 
-def run_generator_engine(option, app_name=None, model_name=None):
+        print('Actualizando archivo urls.py para el proyecto', proj_name)
+        if os.path.exists(os.path.join(proj_name, 'urls.py')):
+            urls_path = os.path.join(target_dir, proj_name, 'urls.py')
+            with open(urls_path, 'a') as f:
+                f.writelines(self.get_urls_lines(app_name))
+        else:
+            print('Archivo no existe en la ubicacion', os.path.join(proj_name, 'urls.py'))
+        
+        print('Todos sus archivos han sido generados y actualizados para el proyecto', proj_name)
+        
 
+def run_generator_engine(option, app_name, model_name):
     if option == 'app':
         if app_name:
             AppGenerator(app_name, model_name).generate()
             AppTemplatesGenerator(app_name, model_name).generate()
+
+def update_settings_file(app_name=None):
+    AppSettingsModifier().modify(app_name)

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load dwll %}
-{% block title %}{% display_message 'home.title'%}{% endblock %}
+{% block title %}{% display_message 'home.title' %}{% endblock title %}
 {% block header %}
 {% include "header.html" %}
 {% endblock %}
@@ -20,7 +20,7 @@
     </div>
 </section>
 {% get_configuration 'HOME.IMAGE' 'https://camo.githubusercontent.com/83206e0a76e319c7a5bf30df586490587b9f9c8e43c58407ffa2c0b5cf571e8a/68747470733a2f2f756e73706c6173682e636f6d2f626c6f672f636f6e74656e742f696d616765732f323032302f30382f646174616865616465722e6a7067' as home_picture %}
-<div class="py-5 bg-image-full" style="background-image: url('{{home_picture}}');">
+<div class="py-5 bg-image-full" style="background-image: url('{{ home_picture }}');">
     <div style="height: 20rem;">
       <div class="row justify-content-center">
         <div class="text-center">

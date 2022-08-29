@@ -16,7 +16,7 @@
               {% for lang in languages %}
               <li class="nav-item">
                 <a class="dropdown-item {% if lang.is_selected %}active{% endif %}" 
-                    href="{% url 'change-language' name=lang.name %}">{{lang.title}}</a> 
+                    href="{% url 'change-language' name=lang.name %}">{{ lang.title }}</a> 
               </li>
               {% endfor %}
             </ul>
@@ -30,7 +30,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarAccount" role="button" 
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="ri-user-fill"></i>&nbsp;
-                {% if user.firstname %}{{user.firstname}}{% else %}{{user.username}}{% endif %}
+                {% if user.firstname %}{{ user.firstname }}{% else %}{{ user.username }}{% endif %}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarAccount">
               <li class="nav-item">
@@ -39,9 +39,15 @@
                     {% display_message 'menu.logout' 'Salir' %}
                 </a> 
               </li> 
+              <li class="nav-item">
+                <a class="dropdown-item" 
+                    href="{% url 'account_logout' %}">
+                    {% display_message 'menu.logout' 'Salir' %}
+                </a> 
+              </li> 
             </ul>
           </li>
-        {% endif %} 
+          {% endif %} 
         </ul>
       </div>
     </div>

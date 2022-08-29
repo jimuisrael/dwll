@@ -24,7 +24,7 @@ class ConsoleCommand:
 
         try:
             while (True):
-                option = str(input('Ingrese actividad [y pulse ENTER]: '))
+                option = str(input('Ingrese la actividad [y pulse ENTER]: '))
                 if option == '0':
                     break
                 elif option == '1':
@@ -38,14 +38,20 @@ class ConsoleCommand:
 
     def option_1(self):
         try:
-            app_name = str(input('Ingrese un nombre de APP:'))
+            app_name = str(input("Ingrese un nombre de APP: "))
             
             option = str(input("Quiere autogenerar un modelo de ejemplo? (s/N) "))
             model_name = None
-            if option == 's':
-                model_name = str(input('Ingrese el nombre del modelo (tabla):'))
+            if option and option.lower() == 's':
+                model_name = str(input("Ingrese el nombre (en singular) del modelo (tabla): "))
             
             generator.run_generator_engine('app', app_name, model_name)
+            
+            option = str(input("Quiere actualizar sus settings y urls? (S/n) "))
+            if not option or option.lower() != 'n':
+                generator.update_settings_file(app_name)
+            else:
+                print("Proyecto Generado!")
         except Exception as e:
             print('Error al procesar opcion 1:', str(e))
             traceback.print_exc()

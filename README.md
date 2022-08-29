@@ -60,7 +60,7 @@ pip install django django-allauth locust beautifulsoup4
 pip install dwll
 ```
 
-3. Cree un proyecto Django, en este ejemplo llamaremos a este proyecto: "myproject"
+3. Cree un proyecto Django, en este ejemplo llamaremos a este proyecto (o el nombre que usted quiera): "myproject"
 
 ```
 django-admin startproject myproject
@@ -82,31 +82,13 @@ cd myproject
 ./manage.py dwll-gen
 ```
 
-...y siga las instrucciones indicadas en la consola. Puede elegir generar la plantilla de una aplicación con un modelo de ejemplo, o solamente la estructura base de una aplicación para iniciar. En este ejemplo llamaremos a la aplicacion "myapp" y al modelo "mymodel".
+...y siga las instrucciones indicadas en la consola. Puede elegir generar la plantilla de una aplicación con un modelo de ejemplo, o solamente la estructura base de una aplicación para iniciar. En este ejemplo llamaremos a la aplicacion "myapp" y al modelo "mymodel" (El nombre de la aplicación, y el modelo, puede ser el que usted quiera).
 
-6. Una vez terminada la generación de la nueva app, copie el siguiente segmento de código al final de su archivo general de URLs: myproject/myproject/urls.py. 
+Al ejecutar la consola, además, se agregarán lineas de código, a su archivo de settings.py y urls.py, que permiten que la nueva aplicación pueda ejecutarse en página de inicio.
 
-```
-from django.urls import include
-urlpatterns.extend([
-    path('', include('myapp.urls')),
-    path('accounts/', include('allauth.urls')),
-    path('dwll/', include('dwll.urls'))
-])
-```
+**Nota:** Luego puede formatear el código autogenerado a discreción.
 
-Y lo siguiente en su archivo de settings:
-
-```
-import os
-INSTALLED_APPS.append('myapp')
-TEMPLATES[0]['DIRS'].append(os.path.join(BASE_DIR, 'myapp', 'templates'))
-LOGIN_REDIRECT_URL = '/'
-```
-
-**Nota:** Luego puede unificar el código copiado a discreción, el formato descrito acá es solo para efectos del ejemplo.
-
-7. Una vez realizados las configuraciones del proyecto, realizaremos la migracion a la base de datos, esto solo deberá realizarlo si ha seleccionado generar el modelo de ejemplo, caso contrario omita la primera linea del siguiente comando:
+6. Una vez generado el proyecto, realizaremos la migracion a la base de datos, esto solo deberá realizarlo si ha seleccionado generar el modelo de ejemplo, caso contrario omita la primera linea del siguiente comando:
 
 ```
 ./manage.py makemigrations myapp
@@ -121,19 +103,19 @@ Migrations for 'myapp':
     - Create model MyModel
 ```
 
-8. Ahora es necesario crear un super usuario para probar la aplicación y la administración del sistema.
+7. Ahora es necesario crear un super usuario para probar la aplicación y la administración del sistema.
 ```
 ./manage.py createsuperuser
 ```
 
 Deberá seguir las instrucciones en consola. Puede ingresar el nombre, email y clave que prefiera, pero deberá recordarlos para poder usar esos datos luego.
 
-9. Finalmente, ejecutaremos el proyecto con el siguiente comando:
+8. Finalmente, ejecutaremos el proyecto con el siguiente comando:
 ```
 ./manage.py runserver
 ```
 
-10. Podremos ingresar a la siguiente URL para ver nuestro nuevo home-page http://localhost:8000. Además, si ha seleccionado generar un modelo de ejemplo, podrá revisar un ejemplo del CRUD autogenerado para dicho modelo en la siguiente dirección: http://localhost:8000/mymodels/ (para acceder deberá autenticarse con su usuario generado, o con cualquier usuario registrado en la consola administrativa de Django: http://localhost:8000/admin)
+9. Podremos ingresar a la siguiente URL para ver nuestro nuevo home-page http://localhost:8000. Además, si ha seleccionado generar un modelo de ejemplo, podrá revisar un ejemplo del CRUD autogenerado para dicho modelo en la siguiente dirección: http://localhost:8000/mymodels/ (para acceder deberá autenticarse con su usuario generado, o con cualquier usuario registrado en la consola administrativa de Django: http://localhost:8000/admin)
 
 ## Pruebas
 DWLL autogenera dos archivos que permiten al desarrollador probar la funcionalidad y eficiencia de su nueva aplicación.
