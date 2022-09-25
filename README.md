@@ -44,13 +44,24 @@ DWLL esta dirigido al desarrollo de aplicaciones Web con Django 4.0 y hace uso d
 
 DWLL requiere [Django](https://docs.djangoproject.com/en/4.0/releases/4.0/) v4.0+ para funcionar.
 
+Si se encuentra usando Windows puede hacer uso de una consola como [Gitbash](https://gitforwindows.org/ ) e instalar [Python 3](https://www.python.org/downloads/release/python-396/) en ese entorno.
+
 1. Instale un entorno virtual para instalar Django y DWLL.
 
+### Linux
 ```sh
 sudo apt-get install python3-pip
 sudo pip3 install virtualenv 
 virtualenv -p python3 venv
 source venv/bin/activate
+```
+
+### Windows
+```sh
+python -m pip install --upgrade pip
+python -m pip install --user virtualenv
+python -m venv ve_pruebas
+source ve_pruebas/Scripts/actívate
 ```
 
 2. Instale Django, dependencias, y DWLL
@@ -104,9 +115,14 @@ Migrations for 'myapp':
 ```
 
 7. Ahora es necesario crear un super usuario para probar la aplicación y la administración del sistema.
+
+### Linux
 ```
 ./manage.py createsuperuser
 ```
+
+### Windows
+winpty python manage.py createsuperuser
 
 Deberá seguir las instrucciones en consola. Puede ingresar el nombre, email y clave que prefiera, pero deberá recordarlos para poder usar esos datos luego.
 

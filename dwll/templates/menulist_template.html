@@ -9,7 +9,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarAccount" role="button" 
                 data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="ri-user-fill"></i>&nbsp;{% display_message 'menu.language' 'Lenguaje' %}
+                <i class="ri-user-fill"></i> {% display_message 'menu.language' 'Lenguaje' %}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarAccount">
               {% get_languages as languages %}
@@ -29,8 +29,8 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarAccount" role="button" 
                 data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="ri-user-fill"></i>&nbsp;
-                {% if user.firstname %}{{user.firstname}}{% else %}{{user.username}}{% endif %}
+                <i class="ri-user-fill"></i> 
+                {% if user.firstname %}{{ user.firstname }}{% else %}{{ user.username }}{% endif %}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarAccount">
               <li class="nav-item">
