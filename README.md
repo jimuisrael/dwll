@@ -122,7 +122,9 @@ Migrations for 'myapp':
 ```
 
 ### Windows
+```
 winpty python manage.py createsuperuser
+```
 
 Deberá seguir las instrucciones en consola. Puede ingresar el nombre, email y clave que prefiera, pero deberá recordarlos para poder usar esos datos luego.
 
